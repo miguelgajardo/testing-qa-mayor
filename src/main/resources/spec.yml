@@ -1,0 +1,77 @@
+openapi: "3.0.2"
+info:
+  title: EGT BO API
+  version: 1
+  description: EGT BO API
+paths:
+  /v1/crear-clave:
+    post:
+      summary: SignUp
+      operationId: crearClave
+      tags:
+        - SignUp
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CrearClaveRequest"
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrearClaveResponse"
+        400:
+          description: Bad Request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorGeneral"
+        403:
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorGeneral"
+        404:
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorGeneral"
+        500:
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorGeneral"
+components:
+  schemas:
+    CrearClaveRequest:
+      type: object
+      required:
+        - rut
+        - password
+        - estado
+      properties:
+        rut:
+          type: string
+        password:
+          type: string
+        estado:
+          type: string
+    CrearClaveResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        mensaje:
+          type: string
+    ErrorGeneral:
+      type: object
+      properties:
+        code:
+          type: string
+        message:
+          type: string
